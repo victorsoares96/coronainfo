@@ -10,7 +10,7 @@
       "web"
     ],
     "ios": {
-      "bundleIdentifier": "com.victor.covid19",
+      "bundleIdentifier": "com.victor.covidg19",
       "buildNumber": "1.0.0",
       "supportsTablet": true
     },
