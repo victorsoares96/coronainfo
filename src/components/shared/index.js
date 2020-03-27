@@ -8,11 +8,7 @@ import Home from '../home';
 import Exame from '../exame';
 import Status from '../status';
 
-import PersonIcon from '../../../assets/icons';
-
-export const FacebookIcon = (style) => (
-    <Icon name='facebook' {...style} />
-);
+import {InfoIcon, ExameIcon, StatusIcon} from '../../../assets/icons';
 
 const HomeScreen = () => (<Home/>);
 const ExameScreen = () => (<Exame/>);
@@ -41,17 +37,17 @@ const BottomTabBar = ({ navigation, state }) => {
     navigation.navigate(state.routeNames[index]);
   };
   return (
-      <BottomNavigation selectedIndex={state.index} onSelect={onSelect}>
-        <BottomNavigationTab title='INFORMATIVO' icon={PersonIcon}/>
-        <BottomNavigationTab style={styles.bTab} title='EXAME' icon={FacebookIcon}/>
-        <BottomNavigationTab title='STATUS'/>
+      <BottomNavigation selectedIndex={state.index} onSelect={onSelect} >
+        <BottomNavigationTab style={styles.bTab} title='INFORMATIVO' icon={InfoIcon}/>
+        <BottomNavigationTab style={styles.bTab} title='EXAME' icon={ExameIcon}/>
+        <BottomNavigationTab style={styles.bTab} title='STATUS' icon={StatusIcon}/>
       </BottomNavigation>
   );
 };
 
 const styles = StyleSheet.create({
     bTab: {
-        marginVertical: 10
+        paddingTop: 10
     }
 });
 export default Tabs;

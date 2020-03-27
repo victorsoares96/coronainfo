@@ -16,20 +16,22 @@ function App() {
   const [ready, setReady] = useState(false);
   useEffect(async () => {
     await Font.loadAsync({
+      'BalooThambi2-Bold': require('./assets/fonts/BalooThambi2-Bold.ttf'),
       'BalooThambi2-Regular': require('./assets/fonts/BalooThambi2-Regular.ttf'),
     });
     setReady(ready => !ready);
+    return () => {}
   }, []);
   if(!ready) return <AppLoading/>
   return (
-    <>
+    <Fragment>
       <IconRegistry icons={EvaIconsPack}/>
       <ApplicationProvider mapping={mapping} theme={theme} customMapping={customMapping}>
         <NavigationContainer>
           <Tabs/>
         </NavigationContainer>
       </ApplicationProvider>
-    </>
+    </Fragment>
   );
 }
 export default App;
