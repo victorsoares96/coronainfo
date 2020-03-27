@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Blank Template",
+    "name": "CoronaVirus",
     "slug": "coronavirus",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -9,6 +9,15 @@
       "android",
       "web"
     ],
+    "ios": {
+      "bundleIdentifier": "com.victor.covid19",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.victor.codvid19",
+      "versionCode": 1
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,9 +31,6 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    }
+    ]
   }
 }
