@@ -7,9 +7,9 @@ const Header = () => (<CardHeader title='O que é?'/>);
 const Header2 = () => (<CardHeader title='Sintomas'/>);
 
 function Home () {
-    const navigation = useNavigation();
-    return (
-      <ScrollView>
+  const navigation = useNavigation();
+  return (
+    <ScrollView>
       <Layout style={styles.container}>
       <Avatar style={styles.avatar} size='giant' source={require('../../../assets/corona.png')}/>
       <Text style={styles.title}>Corona Vírus</Text>
@@ -39,9 +39,9 @@ function Home () {
         </Text>
         <Button onPress={() => {navigation.navigate('EXAME');}}>REALIZAR EXAME</Button>
       </Card>
-    </Layout>
+      </Layout>
     </ScrollView>
-    );
+  );
 }
 
 const styles = StyleSheet.create({
@@ -51,21 +51,21 @@ const styles = StyleSheet.create({
     margin: 8,
     lineHeight: 24 * 1.2
   },
-    container: {
-      flex: 1, 
-      paddingTop: 30, 
-      justifyContent: 'center', 
-      alignItems: 'center'
-    },
-    card: {
-      marginVertical: 8,
-      marginHorizontal: 8
-    },
-    avatar: {
-      margin: 8,
-      width: 200,
-      height: 200
-    }
-  });
+  container: {
+    flex: 1, 
+    paddingTop: 30, 
+    justifyContent: 'center', 
+    alignItems: 'center'
+  },
+  card: {
+    marginVertical: 8,
+    marginHorizontal: 8
+  },
+  avatar: {
+    margin: 8,
+    width: 200,
+    height: 200
+  }
+});
 
 export default Home;
