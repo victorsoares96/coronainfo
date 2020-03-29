@@ -7,25 +7,28 @@ import { useNavigation } from '@react-navigation/native';
 import Home from '../home';
 import Exame from '../exame';
 import Status from '../status';
+import Resultado from '../exame/result';
 
 import {InfoIcon, ExameIcon, StatusIcon} from '../../../assets/icons';
 
 const HomeScreen = () => (<Home/>);
 const ExameScreen = () => (<Exame/>);
+const ResultScreen = () => (<Resultado/>);
 const StatusScreen = () => (<Status/>);
 
 function Tabs() {
     return (
       <BottomTab.Navigator tabBar={props => <BottomTabBar {...props} />}
-      
+
       tabBarOptions={{
-        swipeEnabled:false,
+        swipeEnabled:true,
         animationEnabled: true,
         scrollEnabled: true
       }}>
         <BottomTab.Screen name="INFORMATIVO" component={HomeScreen} />
         <BottomTab.Screen name="EXAME" component={ExameScreen} />
         <BottomTab.Screen name="STATUS" component={StatusScreen} />
+        <BottomTab.Screen name="RESULTADO" component={ResultScreen} />
       </BottomTab.Navigator>
     );
 }

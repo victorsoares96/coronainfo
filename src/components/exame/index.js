@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, FlatList } from 'react-native';
 import { Button, Card, CardHeader, Layout, Radio, RadioGroup } from '@ui-kitten/components';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
 import { DATA } from '../../data';
 
@@ -20,6 +23,7 @@ function ExameList({title, description, id}) {
 }
 
 function Exame () {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <Layout style={{flex: 1}}>
@@ -29,7 +33,7 @@ function Exame () {
         renderItem={({ item }) => (<ExameList id={item.id} title={item.title} description={`Pergunta ${item.id}`}/>)}
         keyExtractor={item => item.id}
       />
-      <Button style={styles.button} onPress={() => {DATA.map((data) => console.log(data.index));}}>RESULTADO</Button>
+      <Button style={styles.button} onPress={() => navigation.navigate('RESULTADO')}>RESULTADO</Button>
       </Layout>
     </ScrollView>
   );
