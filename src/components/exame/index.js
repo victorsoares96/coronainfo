@@ -6,12 +6,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
 import { DATA } from '../../data';
+import { genResult } from './result';
 
 const Header = ({title, description}) => <CardHeader title={title} description={description}/>
 
 function ExameList({title, description, id}) {
   const [check, setCheck] = useState(null);
-  const toogleCheck = (index) => {index == 0 ? setCheck(0) : setCheck(1); DATA[id-1].index = index;}
+  const toogleCheck = (index) => {index == 0 ? setCheck(0) : setCheck(1); DATA[id-1].index = index; console.log(DATA[id-1].index);}
   return (
   <Card header={() => <Header title={title} description={description}/>} style={styles.card}>
     <RadioGroup selectedIndex={check} onChange={toogleCheck}>
@@ -33,7 +34,7 @@ function Exame () {
         renderItem={({ item }) => (<ExameList id={item.id} title={item.title} description={`Pergunta ${item.id}`}/>)}
         keyExtractor={item => item.id}
       />
-      <Button style={styles.button} onPress={() => navigation.navigate('RESULTADO')}>RESULTADO</Button>
+      <Button style={styles.button} onPress={() => {genResult(); navigation.navigate('RESULTADO');}}>RESULTADO</Button>
       </Layout>
     </ScrollView>
   );
