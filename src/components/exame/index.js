@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { DATA } from '../../data';
 import { genResult } from './result';
-
 const Header = ({title, description}) => <CardHeader title={title} description={description}/>
 
 function ExameList({title, description, id}) {
@@ -25,6 +24,9 @@ function ExameList({title, description, id}) {
 
 function Exame () {
   const navigation = useNavigation();
+  const [count, setCount] = useState(0);
+  const test = () => {setCount(count + 1); console.log('count: ', count);}
+  var contador;
   return (
     <ScrollView>
       <Layout style={{flex: 1}}>
@@ -34,7 +36,12 @@ function Exame () {
         renderItem={({ item }) => (<ExameList id={item.id} title={item.title} description={`Pergunta ${item.id}`}/>)}
         keyExtractor={item => item.id}
       />
-      <Button style={styles.button} onPress={() => {genResult(); navigation.navigate('RESULTADO');}}>RESULTADO</Button>
+      <Button style={styles.button} onPress={test
+        //setCount(count + 1);
+        //setCount(count => count + contador);
+        //console.info('count: ', count, 'array:', contador);
+        //navigation.navigate('RESULTADO', { count: count});
+      }>RESULTADO {count}</Button>
       </Layout>
     </ScrollView>
   );
