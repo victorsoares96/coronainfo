@@ -1,34 +1,41 @@
-import React, { useState } from 'react';
-import { CommonActions, useRoute } from '@react-navigation/native';
-import {
-  StyleSheet,
-  View,
-  Image
-} from 'react-native';
-import {
-  Layout,
-  Button,
-  Card,
-  CardHeader,
-  Text,
-} from '@ui-kitten/components';
+import React from 'react';
+import { useRoute } from '@react-navigation/native';
+import { StyleSheet, Image, ScrollView } from 'react-native';
+import { Layout, Button, Card, CardHeader, Text } from '@ui-kitten/components';
 
-import { DATA } from '../../data';
 import { useNavigation } from '@react-navigation/native';
 
-var arraySintomasDoUsuario = [];
-
 function Header({title, description}) {
-  return (
-  <CardHeader title={title} description={description}/>
-  );
+  return (<CardHeader title={title} description={description}/>);
 }
 
+function Description({sintomas}) {
+  return (
+    sintomas >= 6 ?
+    <Text>
+      Em primeiro lugar, sem pânico!{'\n'}{'\n'}
+      A doença é muito contagiosa, mas segundo os 
+      dados disponíveis, a mortalidade é baixa, 
+      principalmente para pacientes jovens e bem de saúde!
+      {'\n'}
+      A recomendação inicial do Ministério da Saúde é ligar 
+      para o número 136 para receber as orientações específicas 
+      caso a caso. Há também um aplicativo de celular chamado 
+      Coronavírus – SUS, disponível para iOS e Android, que dá 
+      o passo a passo em caso de suspeita de infecção.
+    </Text>
+    :
+    <Text>
+
+    </Text>
+  );
+}
 function Resultado() {
   const route = useRoute();
   const navigation = useNavigation();
   const {count} = route.params;
   return (
+    <ScrollView>
     <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
     <Image
       style={count >= 6 ? styles.headerImageSick: styles.headerImageHealthy}
@@ -36,29 +43,28 @@ function Resultado() {
     />
     <Card
       header= {() => <Header title={count >= 6 ? 'Temos más notícias..' : 'Temos boas notícias!'} description={`Você possui ${count} dos sintomas.`}/>} style={{margin: 8}}>
-      <Text>
-      The Maldives, officially the Republic of Maldives, is a small country in South Asia,
-      located in the Arabian Sea of the Indian Ocean.
-      It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian continent
-      </Text>
+      <Description sintomas={count}/>
     </Card>
+    <Card style={styles.card} header={() => <CardHeader title='O que é?'/>} status='primary'>
+      
+    </Card>
+    <Layout style={styles.footerContainer}>
     <Button
       size='small'
       status='basic'
-      onPress={() => navigation.navigate('EXAME')}>
+      style={styles.footerControl}
+      onPress={() => navigation.reset({index: 1, routes: [{ name: 'RESULTADO', params: { count: 0 }}]})}>
       REFAZER EXAME
     </Button>
     <Button
       size='small'
-      onPress={() => {
-        navigation.reset({
-          index: 1,
-          routes: [{ name: 'RESULTADO', params: { count: 0 }}],
-        });
-      /*navigation.navigate('INFORMATIVO', DATA.map((data) => data.index = null))*/}}>
+      style={styles.footerControl}
+      onPress={() => navigation.reset({index: 0, routes: [{ name: 'RESULTADO', params: { count: 0 }}]})}>
       VOLTAR AO INICIO
     </Button>
     </Layout>
+    </Layout>
+    </ScrollView>
   );
 }
 

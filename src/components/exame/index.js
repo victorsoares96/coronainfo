@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, ScrollView, FlatList } from 'react-native';
 import { Button, Card, CardHeader, Layout, Radio, RadioGroup } from '@ui-kitten/components';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
 import { DATA } from '../../data';
-import { genResult } from './result';
+
 const Header = ({title, description}) => <CardHeader title={title} description={description}/>
+
+var count;
 
 function ExameList({title, description, id}) {
   const [check, setCheck] = useState(null);
-  const toogleCheck = (index) => {index == 0 ? setCheck(0) : setCheck(1); DATA[id-1].index = index; console.log(DATA[id-1].index);}
+  const toogleCheck = (index) => {
+    index == 0 ? setCheck(0) : setCheck(1);
+    DATA[id-1].index = index;
+  }
   return (
   <Card header={() => <Header title={title} description={description}/>} style={styles.card}>
     <RadioGroup selectedIndex={check} onChange={toogleCheck}>
@@ -22,11 +25,15 @@ function ExameList({title, description, id}) {
   );
 }
 
+function getCountIndex() {
+  count = 0;
+  DATA.map((data) => {if(data.index == 0) count = count + 1;});
+  return count;
+}
+
 function Exame () {
+  console.log('entrou');
   const navigation = useNavigation();
-  const [count, setCount] = useState(0);
-  const test = () => {setCount(count + 1); console.log('count: ', count);}
-  var contador;
   return (
     <ScrollView>
       <Layout style={{flex: 1}}>
@@ -34,14 +41,11 @@ function Exame () {
         style={styles.flatlist}
         data={DATA}
         renderItem={({ item }) => (<ExameList id={item.id} title={item.title} description={`Pergunta ${item.id}`}/>)}
-        keyExtractor={item => item.id}
+        keyExtractor={item => (item.id).toString()}
       />
-      <Button style={styles.button} onPress={test
-        //setCount(count + 1);
-        //setCount(count => count + contador);
-        //console.info('count: ', count, 'array:', contador);
-        //navigation.navigate('RESULTADO', { count: count});
-      }>RESULTADO {count}</Button>
+      <Button style={styles.button} onPress={() => navigation.navigate('RESULTADO', {count: getCountIndex()})}>
+        RESULTADO
+      </Button>
       </Layout>
     </ScrollView>
   );
