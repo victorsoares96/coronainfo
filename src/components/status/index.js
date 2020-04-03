@@ -1,12 +1,24 @@
 import React from 'react';
-import { Layout, Text, Button } from '@ui-kitten/components';
+import { Layout } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
-function Status ({navigation}) {
+import { Header } from './components';
+
+function Status () {
     return (
-    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text catetory='h1'>Status Works!</Text>
+    <Layout style={styles.container}>
+      <Header/>
     </Layout>
     );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 8,
+  }
+});
 
 export default Status;
