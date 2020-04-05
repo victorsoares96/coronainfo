@@ -27,7 +27,7 @@ export function MundoScreen() {
       </>
     );
 }
-  
+
 export function PaisScreen() {
     return (
       <>
@@ -39,14 +39,12 @@ export function PaisScreen() {
       </>
     );
   }
-  
+
 function getCasosPorEstado(source, state, cases) {
     source.map((item) => {if(item.state == state) { state = item.state; cases = item.cases;}});
 }
 
-function Geral() {
-  const route = useRoute();
-  const { count } = route.params;
+function Geral({count}) {
   return (
     <Text style={{textAlign: 'center'}}>
       Casos: {count}, Mortes: 0
@@ -55,39 +53,39 @@ function Geral() {
 }
 
 function Selecionar() {
-  var options = [{text: 'Escolha um estado:'}];
-  const [count, setCount] = useState();
-  const data = getEstados();
+  const x = 0;
   const navigation = useNavigation();
-    data.map((item) => options.push({text: item.state}));  
-    const [selectedOption, setSelectedOption] = React.useState([options[0]]);
-    useEffect(() => {
-      console.log(Object.values(selectedOption));
-      setCount(Object.values(selectedOption));
-      navigation.setParams({count: count});
-        return () => {
-        }
-    }, [selectedOption]);
-    return (
-      <Select
-        style={styles.select}
-        data={options}
-        size='small'
-        status='basic'
-        placeholder='Escolha um Estado:'
-        selectedOption={selectedOption}
-        onSelect={setSelectedOption}
-      />
-    );
+  var options = [{text: 'Escolha um estado:'}];
+  const [count, setCount] = useState('0');
+  const data = getEstados();
+  data.map((item) => options.push({text: item.state}));
+  const [selectedOption, setSelectedOption] = React.useState([options[0]]);
+  //navigation.setParams({test: count});
+  return (
+    <>
+    <Select
+      style={styles.select}
+      data={options}
+      size='small'
+      status='basic'
+      placeholder='Escolha um Estado:'
+      selectedOption={selectedOption}
+      onSelect={setSelectedOption}
+    />
+  <Geral count={x}/>
+  </>
+  );
 }
 export function EstadoScreen() {
   //const [count, setCount] = useState();
+  const route = useRoute();
   return (
     <>
       <ScrollView>
         <Layout style={styles.container}>
+          <>
           <Selecionar/>
-          <Geral/>
+          </>
         </Layout>
       </ScrollView>
     </>
