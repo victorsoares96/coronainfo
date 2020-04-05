@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, FlatList } from 'react-native';
 import { Button, ButtonGroup, Select, Layout, Text } from '@ui-kitten/components';
 
 import { getEstados, getPaises, getTotal } from './service';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export function Header() {
     const navigation = useNavigation();
@@ -17,29 +17,11 @@ export function Header() {
 }
 
 export function MundoScreen() {
-    const data = [
-        { text: 'Option 1' },
-        { text: 'Option 2' },
-        { text: 'Option 3' },
-      ];
-      const [selectedOption, setSelectedOption] = useState(data[0]);
-      useEffect(() => {
-          setSelectedOption('true');
-          return () => {
-            
-          }
-      }, [selectedOption]);
-      console.log(selectedOption);
     return (
       <>
         <ScrollView>
           <Layout style={styles.container}>
-    <Text>Mundo Works!</Text>
-            <Select
-        data={data}
-        selectedOption={selectedOption}
-        onSelect={setSelectedOption}
-      />
+            <Text>Mundo Works!</Text>
           </Layout>
         </ScrollView>
       </>
@@ -61,23 +43,33 @@ export function PaisScreen() {
 function getCasosPorEstado(source, state, cases) {
     source.map((item) => {if(item.state == state) { state = item.state; cases = item.cases;}});
 }
-export function EstadoScreen() {
-    const data = getEstados();
-    var options = [];
+
+function Geral() {
+  const route = useRoute();
+  const { count } = route.params;
+  return (
+    <Text style={{textAlign: 'center'}}>
+      Casos: {count}, Mortes: 0
+    </Text>
+  );
+}
+
+function Selecionar() {
+  var options = [{text: 'Escolha um estado:'}];
+  const [count, setCount] = useState();
+  const data = getEstados();
+  const navigation = useNavigation();
     data.map((item) => options.push({text: item.state}));  
-    const [selectedOption, setSelectedOption] = React.useState(null);
+    const [selectedOption, setSelectedOption] = React.useState([options[0]]);
     useEffect(() => {
-        console.log(selectedOption);
+      console.log(Object.values(selectedOption));
+      setCount(Object.values(selectedOption));
+      navigation.setParams({count: count});
         return () => {
         }
     }, [selectedOption]);
-    data.map((item) => console.log('Estado: ', item.state, 'Casos: ', item.cases, 'Cidades: ', item.citys));
-    //getCasosPorEstado(data, 'SP', estado, casos);
     return (
-      <>
-        <ScrollView>
-          <Layout style={styles.container}>
-          <Select
+      <Select
         style={styles.select}
         data={options}
         size='small'
@@ -86,13 +78,29 @@ export function EstadoScreen() {
         selectedOption={selectedOption}
         onSelect={setSelectedOption}
       />
-          </Layout>
-        </ScrollView>
-      </>
     );
+}
+export function EstadoScreen() {
+  //const [count, setCount] = useState();
+  return (
+    <>
+      <ScrollView>
+        <Layout style={styles.container}>
+          <Selecionar/>
+          <Geral/>
+        </Layout>
+      </ScrollView>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+    flex: 1,
+    padding: 8,
+  },
     select: {
         margin: 8,
     },
