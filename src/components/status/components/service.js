@@ -7,9 +7,9 @@ export function getEstados() {
         const result = await axios(
         'https://api.coronaanalytic.com/journal',
         );
-        setData(...data, {estados: result.data.values});
+        setData(result.data.values);
     }, []);
-    return data.estados;
+    return data;
 }
 
 export function getPaises() {
