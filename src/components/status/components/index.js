@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, FlatList } from 'react-native';
 import { Button, ButtonGroup, Select, Layout, Text } from '@ui-kitten/components';
-
+import axios from 'axios';
 import { getEstados, getPaises, getTotal } from './service';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -52,13 +52,21 @@ function Geral({count}) {
   );
 }
 
-function Selecionar() {
+async function Selecionar() {
   const x = 0;
-  const navigation = useNavigation();
   var options = [{text: 'Escolha um estado:'}];
-  const [count, setCount] = useState('0');
-  const data = getEstados();
-  data.map((item) => options.push({text: item.state}));
+  //const data = getEstados();
+  const [data, setData] = useState([]);
+  useEffect(async () => {
+    const result = await axios(
+        'https://api.coronaanalytic.com/journal',
+        );
+        //setData(result.data.values);
+    //console.log(data);
+    //const [count, setCount] = useState('0');
+    //const data = getEstados();
+    //data.map((item) => options.push({text: item.state}));
+  }, []);
   const [selectedOption, setSelectedOption] = React.useState([options[0]]);
   //navigation.setParams({test: count});
   return (
@@ -77,15 +85,39 @@ function Selecionar() {
   );
 }
 export function EstadoScreen() {
-  //const [count, setCount] = useState();
-  const route = useRoute();
+  const [repositories, setRepositories] = useState(['Loading...']);
+  const [options, setOptions] = useState([{text: 'Escolha um estado:'}]);
+  const [selectedOption, setSelectedOption] = React.useState([options[0]]);
+  const [estado, setEstado] = useState([]);
+  const [estados, setEstados] = useState([]);
+  useEffect(() => {
+    async function loadRepositories() {
+      const response = await axios.get('https://api.coronaanalytic.com/journal');
+      setRepositories(response.data);
+      setEstado(response.data.values[0]);
+      setEstados(response.data.values);
+      estados.map((item) => {
+        setOptions(...options, {text: item.state});
+      });
+    }
+
+    loadRepositories();
+  }, []);
   return (
     <>
       <ScrollView>
         <Layout style={styles.container}>
-          <>
-          <Selecionar/>
-          </>
+          <Select
+            style={styles.select}
+            data={options}
+            size='small'
+            status='basic'
+            placeholder='Escolha um Estado:'
+            selectedOption={selectedOption}
+            onSelect={setSelectedOption}
+          />
+        <Text>{JSON.stringify(options)}</Text>
+          <Text>{JSON.stringify(estado)}</Text>
         </Layout>
       </ScrollView>
     </>
