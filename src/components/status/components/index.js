@@ -84,21 +84,26 @@ async function Selecionar() {
   </>
   );
 }
+async function loadoptions() {
+  var options = [];
+  const response = await axios.get('https://api.coronaanalytic.com/journal');
+  (response.data.values).map((item) => options.push({text: item.state}));
+  return options;
+}
 export function EstadoScreen() {
+  console.log(loadoptions());
   const [repositories, setRepositories] = useState(['Loading...']);
-  const [options, setOptions] = useState([{text: 'Escolha um estado:'}]);
+  const [options, setOptions] = useState(loadoptions());
   const [selectedOption, setSelectedOption] = React.useState([options[0]]);
   const [estado, setEstado] = useState([]);
   const [estados, setEstados] = useState([]);
   useEffect(() => {
     async function loadRepositories() {
       const response = await axios.get('https://api.coronaanalytic.com/journal');
+      console.log(response.data.values);
       setRepositories(response.data);
-      setEstado(response.data.values[0]);
+      setEstado(response.data.values[0].state);
       setEstados(response.data.values);
-      estados.map((item) => {
-        setOptions(...options, {text: item.state});
-      });
     }
 
     loadRepositories();
@@ -117,7 +122,7 @@ export function EstadoScreen() {
             onSelect={setSelectedOption}
           />
         <Text>{JSON.stringify(options)}</Text>
-          <Text>{JSON.stringify(estado)}</Text>
+          <Text>{JSON.stringify(estados)}</Text>
         </Layout>
       </ScrollView>
     </>
