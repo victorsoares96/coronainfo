@@ -91,23 +91,30 @@ async function loadoptions() {
   return options;
 }
 export function EstadoScreen() {
-  console.log(loadoptions());
   const [repositories, setRepositories] = useState(['Loading...']);
-  const [options, setOptions] = useState(loadoptions());
-  const [selectedOption, setSelectedOption] = React.useState([options[0]]);
+  const [options, setOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(['CE']);
   const [estado, setEstado] = useState([]);
+  const [casos, setCasos] = useState(null);
   const [estados, setEstados] = useState([]);
   useEffect(() => {
     async function loadRepositories() {
       const response = await axios.get('https://api.coronaanalytic.com/journal');
-      console.log(response.data.values);
       setRepositories(response.data);
+      console.log(response.data.values[0].cases);
       setEstado(response.data.values[0].state);
+      setCasos(response.data.values[0].cases);
       setEstados(response.data.values);
+      var options2 = [];
+      (response.data.values).map((item) => options2.push({text: item.state}));
+      setOptions(options2);
     }
 
     loadRepositories();
   }, []);
+  useEffect(() => {
+    setEstado(selectedOption);
+  }, [selectedOption]);
   return (
     <>
       <ScrollView>
@@ -121,8 +128,10 @@ export function EstadoScreen() {
             selectedOption={selectedOption}
             onSelect={setSelectedOption}
           />
-        <Text>{JSON.stringify(options)}</Text>
-          <Text>{JSON.stringify(estados)}</Text>
+        <Text style={{textAlign: 'center'}}>
+          Estado: {(Object.values(selectedOption)).values().next().value.toString()}, Casos: {casos}
+        </Text>
+        <Text>{JSON.stringify(estado)}</Text>
         </Layout>
       </ScrollView>
     </>
