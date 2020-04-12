@@ -5,7 +5,7 @@ import { Select, Text, CardHeader, Card, Tooltip } from '@ui-kitten/components';
 export function ConsolidadoPais({pais, casos, mortes, recuperados}) {
   return (
       <>
-    <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center'}}>Brasil</Text>
+    <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Brasil</Text>
     <Text style={{textAlign: 'center'}}>
       Casos: {casos}, Mortes: {mortes}, Recuperados: {recuperados}
     </Text>
@@ -35,7 +35,7 @@ export function EstadoList({data}) {
 
   function Header({estado, populacao}) {
     function formatNumber (num) {
-        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "1.")
     }
     return (
       <CardHeader title={estado} description={`População: ${formatNumber(populacao)}`}/>
@@ -49,7 +49,7 @@ export function EstadoList({data}) {
           Casos: {casos} {'\n'}
           Casos por Habitante: {casos_hab.toFixed(2)} {'\n'}
           Mortes: {mortes} {'\n'}
-          Mortalidade {((mortalidade)*100).toFixed(2)}% {'\n'}
+          Mortalidade: {((mortalidade)*100).toFixed(2)}%
         </Text>
       </Card>
     );
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     margin: 8
   },
   card: {
-      margin: 8
+      marginVertical: 8
   },
   buttonGroup: {
     margin: 8

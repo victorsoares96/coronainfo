@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StyleSheet, ScrollView} from 'react-native';
-import { Layout, Text, Avatar } from '@ui-kitten/components';
+import { Layout } from '@ui-kitten/components';
 
 import {
   Header,
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, 
     paddingTop: 30, 
-    justifyContent: 'center', 
-    alignItems: 'center'
+    justifyContent: 'center',
+    textAlign: 'center'
   }
 });
 

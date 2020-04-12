@@ -43,19 +43,11 @@ export function Estado() {
   }, [selectedOption]);
 
   return (
-    <>
-      <View>
-        <Layout style={styles.container}>
-          <Selecionar options={options} selectedOption={selectedOption} SelectOption={SelectOption}/>
-          <ConsolidadoEstado estado={estado} casos={casos}/>
-        </Layout>
-      </View>
-      <ScrollView>
-        <Layout style={styles.container}>
-          <CityList data={cidades}/>  
-        </Layout>
-      </ScrollView>
-    </>
+    <Layout style={styles.container}>
+      <Selecionar options={options} selectedOption={selectedOption} SelectOption={SelectOption}/>
+      <ConsolidadoEstado estado={estado} casos={casos}/>
+      <CityList data={cidades}/>  
+    </Layout>
   );
 }
 

@@ -2,7 +2,12 @@ import React from 'react';
 import { Layout } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import { Header, MundoScreen, PaisScreen, EstadoScreen } from './components';
+
+const Mundo = () => (<MundoScreen/>);
+const Pais = () => (<PaisScreen/>);
+const Estado = () => (<EstadoScreen/>);
 
 const Stack = createStackNavigator();
 function Status () {
@@ -12,9 +17,9 @@ function Status () {
         <Header/>
       </Layout>
       <Stack.Navigator headerMode='none'>
-        <Stack.Screen name="Mundo" component={() => <MundoScreen/>}/>
-        <Stack.Screen name="Pais" component={() => <PaisScreen/>}/>
-        <Stack.Screen name="Estado" component={() => <EstadoScreen/>}/>
+        <Stack.Screen name="Mundo" component={Mundo}/>
+        <Stack.Screen name="Pais" component={Pais}/>
+        <Stack.Screen name="Estado" component={Estado}/>
       </Stack.Navigator>
       </>
     );

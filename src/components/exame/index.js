@@ -31,23 +31,26 @@ function getCountIndex() {
   return count;
 }
 
+function FooterList({navigation}) {
+  return (
+    <Button style={styles.button} onPress={() => navigation.navigate('RESULTADO', {count: getCountIndex()})}>
+      RESULTADO
+    </Button>
+  );
+}
+
 function Exame () {
-  console.log('entrou');
   const navigation = useNavigation();
   return (
-    <ScrollView>
-      <Layout style={{flex: 1}}>
+    <Layout style={{flex: 1}}>
       <FlatList
         style={styles.flatlist}
         data={DATA}
+        ListFooterComponent={() => <FooterList navigation={navigation}/>}
         renderItem={({ item }) => (<ExameList id={item.id} title={item.title} description={`Pergunta ${item.id}`}/>)}
         keyExtractor={item => (item.id).toString()}
       />
-      <Button style={styles.button} onPress={() => navigation.navigate('RESULTADO', {count: getCountIndex()})}>
-        RESULTADO
-      </Button>
-      </Layout>
-    </ScrollView>
+    </Layout>
   );
 }
 

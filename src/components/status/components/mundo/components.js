@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { Select, Text, CardHeader, Card, Tooltip } from '@ui-kitten/components';
+
+function formatNumber (num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "1.")
+}
 
 export function ConsolidadoMundo({casos, mortes, recuperados}) {
   return (
     <>
-    <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center'}}>Mundo</Text>
+    <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Mundo</Text>
     <Text style={{textAlign: 'center'}}>
-      Casos: {casos}, Mortes: {mortes}, Recuperados: {recuperados}
+      Casos: {formatNumber(casos)}, Mortes: {formatNumber(mortes)}, Recuperados: {formatNumber(recuperados)}
     </Text>
     </>
   );
@@ -15,7 +19,6 @@ export function ConsolidadoMundo({casos, mortes, recuperados}) {
 
 export function Selecionar({options, selectedOption, SelectOption}) {
   return (
-    <>
     <Select
       style={styles.select}
       data={options}
@@ -26,29 +29,28 @@ export function Selecionar({options, selectedOption, SelectOption}) {
       selectedOption={selectedOption}
       onSelect={SelectOption}
     />
-    </>
   );
 }
 
-export function EstadoList({data}) {
+export function WorldList({data}) {
 
-  function Header({estado, populacao}) {
-    function formatNumber (num) {
-        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-    }
+  function Header({pais, provincia}) {
     return (
-      <CardHeader title={estado} description={`População: ${formatNumber(populacao)}`}/>
+      <CardHeader title={pais} description={`Província: ${provincia}`}/>
     );
   }
 
-  function CardList({estado, populacao, casos, casos_hab, mortes, mortalidade}) {
+  function CardList({pais, provincia, casos, mortes, recovered}) {
+    const mortalidade = ((mortes/casos)*100).toFixed(2);
+    const tx_recovered = ((recovered/casos)*100).toFixed(2);
     return (
-      <Card style={styles.card} header={() => <Header estado={estado} populacao={populacao}/>}>
+      <Card style={styles.card} header={() => <Header pais={pais} provincia={provincia}/>}>
         <Text>
           Casos: {casos} {'\n'}
-          Casos por Habitante: {casos_hab.toFixed(2)} {'\n'}
           Mortes: {mortes} {'\n'}
-          Mortalidade {((mortalidade)*100).toFixed(2)}% {'\n'}
+          Mortalidade: {mortalidade}% {'\n'}
+          Recuperações: {recovered} {'\n'}
+          Taxa de Recuperações: {tx_recovered}%
         </Text>
       </Card>
     );
@@ -58,10 +60,9 @@ export function EstadoList({data}) {
     <FlatList
       data={data}
       renderItem={({ item }) => 
-      <CardList estado={item.state} populacao={item.estimated_population_2019} 
-                casos={item.confirmed} casos_hab={item.confirmed_per_100k_inhabitants}
-                mortes={item.deaths} mortalidade={item.death_rate}/>}
-      keyExtractor={item => item.id}
+      <CardList pais={item.countryregion} provincia={item.provincestate == '' ? 'Nenhuma' : item.provincestate} 
+                casos={item.confirmed} mortes={item.deaths} recovered={item.recovered}/>}
+      keyExtractor={item => (item.id)}
     />
   );
 }
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     margin: 8
   },
   card: {
-      margin: 8
+      marginVertical: 8
   },
   buttonGroup: {
     margin: 8

@@ -8,12 +8,14 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: 'BalooThambi2-Bold',
         margin: 8,
-        lineHeight: 24 * 1.2
+        lineHeight: 24 * 1.2,
+        textAlign: 'center'
     },
     avatar: {
         margin: 8,
         width: 200,
-        height: 200
+        height: 200,
+        alignSelf: 'center'
     },
     card: {
         marginVertical: 8,
@@ -80,7 +82,7 @@ export function Surgimento() {
     return (
       <Card style={styles.card} header={Header} status='primary'>
         <Text>
-          A transmissão dos coronavírus costuma ocorrer pelo ar ou por contato pessoal com secreções contaminadas, como:{'\n'}{'\n'}
+          A transmissão dos coronavírus costuma ocorrer pelo ar ou por contato pessoal com secreções contaminadas, como:{'\n'}
         </Text>
         <List data={sintomas} renderItem={renderItem}/>
         <Text>

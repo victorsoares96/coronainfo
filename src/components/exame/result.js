@@ -1,12 +1,12 @@
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
-import { StyleSheet, Image, ScrollView } from 'react-native';
+import { StyleSheet, Image, ScrollView, View } from 'react-native';
 import { Layout, Button, Card, CardHeader, Text } from '@ui-kitten/components';
 
 import { useNavigation } from '@react-navigation/native';
 
 function Header({title, description}) {
-  return (<CardHeader title={title} description={description}/>);
+  return (<CardHeader titleStyle={{fontSize: 18}} title={title} description={description}/>);
 }
 
 function Description({sintomas}) {
@@ -26,7 +26,10 @@ function Description({sintomas}) {
     </Text>
     :
     <Text>
-
+      Você não parece estar com o novo Coronavírus. 
+      Mas fique atento! Mais e mais pessoas estão se 
+      contagiando com o decorrer da pandemia então é 
+      importante que você continue se cuidando e ficando em casa!
     </Text>
   );
 }
@@ -35,41 +38,37 @@ function Resultado() {
   const navigation = useNavigation();
   const {count} = route.params;
   return (
-    <ScrollView>
-    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Image
-      style={count >= 6 ? styles.headerImageSick: styles.headerImageHealthy}
-      source={require(count >= 6 ? '../../../assets/doente.png' : '../../../assets/healthy.png')}
-    />
-    <Card
-      header= {() => <Header title={count >= 6 ? 'Temos más notícias..' : 'Temos boas notícias!'} description={`Você possui ${count} dos sintomas.`}/>} style={{margin: 8}}>
-      <Description sintomas={count}/>
-    </Card>
-    <Card style={styles.card} header={() => <CardHeader title='O que é?'/>} status='primary'>
-      
-    </Card>
-    <Layout style={styles.footerContainer}>
-    <Button
-      size='small'
-      status='basic'
-      style={styles.footerControl}
-      onPress={() => navigation.reset({index: 1, routes: [{ name: 'RESULTADO', params: { count: 0 }}]})}>
-      REFAZER EXAME
-    </Button>
-    <Button
-      size='small'
-      style={styles.footerControl}
-      onPress={() => navigation.reset({index: 0, routes: [{ name: 'RESULTADO', params: { count: 0 }}]})}>
-      VOLTAR AO INICIO
-    </Button>
+    <Layout style={{flex: 1, justifyContent: 'center', paddingTop: 40}}>
+      <Image
+        style={count >= 6 ? styles.headerImageSick: styles.headerImageHealthy}
+        source={count >= 6 ? require('../../../assets/doente.png') : require('../../../assets/healthy.png')}
+      />
+      <Card header = {() => <Header title={count >= 6 ? 'Temos más notícias..' : 'Temos boas notícias!'} 
+                             description={`Você possui ${count} dos sintomas.`}/>} style={{margin: 8}}>
+        <Description sintomas={count}/>
+      </Card>
+      <View style={styles.footerContainer}>
+        <Button
+        size='small'
+        status='basic'
+        style={styles.footerControl}
+        onPress={() => navigation.reset({index: 1, routes: [{ name: 'RESULTADO', params: { count: 0 }}]})}>
+        REFAZER EXAME
+        </Button>
+        <Button
+        size='small'
+        style={styles.footerControl}
+        onPress={() => navigation.reset({index: 0, routes: [{ name: 'RESULTADO', params: { count: 0 }}]})}>
+        VOLTAR AO INICIO
+        </Button>
+      </View>
     </Layout>
-    </Layout>
-    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   footerContainer: {
+    padding: 8,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -80,10 +79,12 @@ const styles = StyleSheet.create({
   headerImageSick: {
     width: 250,
     height: 292,
+    alignSelf: 'center'
   },
   headerImageHealthy: {
     width: 150,
     height: 192,
+    alignSelf: 'center'
   },
   footerControl: {
     marginHorizontal: 4,

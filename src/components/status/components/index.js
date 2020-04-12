@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, ButtonGroup, Layout, Spinner } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
-
+import { SafeAreaView } from 'react-native';
 import { Estado } from './estado';
 import { Pais } from './pais';
 import { Mundo } from './mundo';
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
+    marginTop: 30
   },
   buttonGroup: {
     margin: 8,
