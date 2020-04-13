@@ -11,7 +11,7 @@ export function ConsolidadoMundo({casos, mortes, recuperados}) {
     <>
     <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Mundo</Text>
     <Text style={{textAlign: 'center'}}>
-      Casos: {formatNumber(casos)}, Mortes: {formatNumber(mortes)}, Recuperados: {formatNumber(recuperados)}
+      Casos: {casos}, Mortes: {mortes}, Recuperados: {recuperados}
     </Text>
     </>
   );
@@ -55,12 +55,12 @@ export function WorldList({data}) {
       </Card>
     );
   }
-  
+
   return (
     <FlatList
       data={data}
-      renderItem={({ item }) => 
-      <CardList pais={item.countryregion} provincia={item.provincestate == '' ? 'Nenhuma' : item.provincestate} 
+      renderItem={({ item }) =>
+      <CardList pais={item.countryregion} provincia={item.provincestate == '' ? 'Nenhuma' : item.provincestate}
                 casos={item.confirmed} mortes={item.deaths} recovered={item.recovered}/>}
       keyExtractor={item => (item.id)}
     />
