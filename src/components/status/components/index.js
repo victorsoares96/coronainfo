@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, ButtonGroup, Layout, Spinner } from '@ui-kitten/components';
+import { Button, ButtonGroup, Layout } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native';
 import { Estado } from './estado';
 import { Pais } from './pais';
 import { Mundo } from './mundo';
@@ -21,7 +20,7 @@ export function Header() {
 }
 
 export function MundoScreen() {
-    return (<Mundo/>);
+  return (<Mundo/>);
 }
 
 export function PaisScreen() {

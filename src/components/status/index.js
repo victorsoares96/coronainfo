@@ -10,19 +10,19 @@ const Pais = () => (<PaisScreen/>);
 const Estado = () => (<EstadoScreen/>);
 
 const Stack = createStackNavigator();
-function Status () {
-    return (
-      <>
-      <Layout style={styles.container}>
-        <Header/>
-      </Layout>
-      <Stack.Navigator headerMode='none'>
-        <Stack.Screen name="Mundo" component={Mundo}/>
-        <Stack.Screen name="Pais" component={Pais}/>
-        <Stack.Screen name="Estado" component={Estado}/>
-      </Stack.Navigator>
-      </>
-    );
+function Status ({initialRouteName}) {
+  return (
+    <>
+    <Layout style={styles.container}>
+      <Header/>
+    </Layout>
+    <Stack.Navigator headerMode='none' initialRouteName={initialRouteName}>
+      <Stack.Screen name="Mundo" component={Mundo}/>
+      <Stack.Screen name="Pais" component={Pais}/>
+      <Stack.Screen name="Estado" component={Estado}/>
+    </Stack.Navigator>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
