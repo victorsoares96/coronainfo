@@ -49,8 +49,8 @@ const BottomTabBar = ({ navigation, state }) => {
 };
 
 const styles = StyleSheet.create({
-    bTab: {
-        paddingTop: 10
-    }
+  bTab: {
+    paddingTop: 10
+  }
 });
 export default Tabs;

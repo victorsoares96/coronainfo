@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
-import { Select, Text, CardHeader, Card, Tooltip } from '@ui-kitten/components';
+import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
 
 function formatNumber (num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "1.")
+  return new Intl.NumberFormat().format(num);
 }
 
 export function ConsolidadoPais({pais, casos, mortes, recuperados}) {
@@ -11,16 +11,20 @@ export function ConsolidadoPais({pais, casos, mortes, recuperados}) {
     <>
     <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Brasil</Text>
     <Text style={{textAlign: 'center'}}>
-      Casos: {casos}, Mortes: {mortes}, Recuperados: {recuperados}
+      Casos: {formatNumber(casos)},
+      Mortes: {formatNumber(mortes)},
+      Recuperados: {formatNumber(recuperados)}
     </Text>
     </>
   );
 }
 
-export function Selecionar({options, selectedOption, SelectOption}) {
+export function Selecionar({options, selectedOption, SelectOption, ult_atualizacao}) {
   return (
     <>
-    <Text style={styles.caption}>Disponível apenas no Brasil por enquanto!</Text>
+    <Text style={styles.caption}>
+      Ultima atualização: {new Date(ult_atualizacao).toLocaleDateString()}
+    </Text>
     <Select
       style={styles.select}
       //data={options}
@@ -40,16 +44,18 @@ export function EstadoList({data}) {
   function Header({estado, populacao}) {
 
     return (
-      <CardHeader title={estado} description={`População: ${formatNumber(populacao)}`}/>
+      <CardHeader 
+      title={estado} 
+      description={`População: ${formatNumber(populacao)}`}/>
     );
   }
 
   function CardList({estado, populacao, casos, casos_hab, mortes, mortalidade}) {
     return (
-      <Card style={styles.card} header={() => <Header estado={estado} populacao={formatNumber(populacao)}/>}>
+      <Card style={styles.card} header={() => <Header estado={estado} populacao={populacao}/>}>
         <Text>
-          Casos: {JSON.stringify(casos)} {'\n'}
-          Casos por Habitante: {casos_hab.toFixed(2)} {'\n'}
+          Casos: {formatNumber(casos)} {'\n'}
+          Casos por Habitante: {formatNumber(casos_hab)} {'\n'}
           Mortes: {formatNumber(mortes)} {'\n'}
           Mortalidade: {((mortalidade)*100).toFixed(2)}%
         </Text>

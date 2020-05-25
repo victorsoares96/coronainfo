@@ -77,7 +77,7 @@ export function Pais() {
           <Loading/>
           :
           <>
-          <Selecionar/>
+          <Selecionar ult_atualizacao={estados[0]?.date}/>
           <ConsolidadoPais casos={pais.confirmed} mortes={pais.deaths} recuperados={pais.recovered}/>
           <EstadoList data={estados}/>
           </>

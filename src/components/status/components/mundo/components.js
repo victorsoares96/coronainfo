@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
-import { Select, Text, CardHeader, Card, Tooltip } from '@ui-kitten/components';
+import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
 
 function formatNumber (num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "1.")
+  return new Intl.NumberFormat().format(num);
 }
 
 export function ConsolidadoMundo({casos, mortes, recuperados}) {
@@ -11,7 +11,9 @@ export function ConsolidadoMundo({casos, mortes, recuperados}) {
     <>
     <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Mundo</Text>
     <Text style={{textAlign: 'center'}}>
-      Casos: {casos}, Mortes: {mortes}, Recuperados: {recuperados}
+      Casos: {formatNumber(casos)}, 
+      Mortes: {formatNumber(mortes)}, 
+      Recuperados: {formatNumber(recuperados)}
     </Text>
     </>
   );
@@ -46,10 +48,10 @@ export function WorldList({data}) {
     return (
       <Card style={styles.card} header={() => <Header pais={pais} provincia={provincia}/>}>
         <Text>
-          Casos: {casos} {'\n'}
-          Mortes: {mortes} {'\n'}
+          Casos: {formatNumber(casos)} {'\n'}
+          Mortes: {formatNumber(mortes)} {'\n'}
           Mortalidade: {mortalidade}% {'\n'}
-          Recuperações: {recovered} {'\n'}
+          Recuperações: {formatNumber(recovered)} {'\n'}
           Taxa de Recuperações: {tx_recovered}%
         </Text>
       </Card>

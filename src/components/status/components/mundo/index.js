@@ -9,10 +9,8 @@ import { ConsolidadoMundo, WorldList } from './components';
 export function Mundo() {
 
   const navigation = useNavigation();
-  const [casos, setCasos] = useState(null);
-  const [mortes, setMortes] = useState(null);
-  const [recovered, setRecovered] = useState(null);
   const [paises, setPaises] = useState([]);
+  const [mundo, setMundo] = useState([]);
   const [isLoading, setLoadingStatus] = useState(true);
   const [isError, setErrorStatus] = useState(false);
 
@@ -54,9 +52,7 @@ export function Mundo() {
         const response2 = await axios.get(`https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest`);
         setLoadingStatus(false);
         setPaises(response2.data);
-        setCasos(response.data.confirmed);
-        setMortes(response.data.deaths);
-        setRecovered(response.data.recovered);
+        setMundo(response.data);
       } catch (error) {
         setErrorStatus(true);
       }
@@ -70,7 +66,7 @@ export function Mundo() {
           <Loading/>
           :
           <>
-          <ConsolidadoMundo casos={casos} mortes={mortes} recuperados={recovered}/>
+          <ConsolidadoMundo casos={mundo.confirmed} mortes={mundo.deaths} recuperados={mundo.recovered}/>
           <WorldList data={paises}/>
           </>
       }
