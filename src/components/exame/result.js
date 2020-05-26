@@ -39,6 +39,7 @@ function Resultado() {
   const {count} = route.params;
   return (
     <Layout style={{flex: 1, justifyContent: 'center', paddingTop: 40}}>
+      <ScrollView>
       <Image
         style={count >= 6 ? styles.headerImageSick: styles.headerImageHealthy}
         source={count >= 6 ? require('../../../assets/doente.png') : require('../../../assets/healthy.png')}
@@ -47,7 +48,7 @@ function Resultado() {
                              description={`Você possui ${count} dos sintomas.`}/>} style={{margin: 8}}>
         <Description sintomas={count}/>
       </Card>
-      <View style={styles.footerContainer}>
+      <Layout style={styles.footerContainer}>
         <Button
         size='small'
         status='basic'
@@ -61,7 +62,8 @@ function Resultado() {
         onPress={() => navigation.reset({index: 0, routes: [{ name: 'RESULTADO', params: { count: 0 }}]})}>
         VOLTAR AO INICIO
         </Button>
-      </View>
+      </Layout>
+      </ScrollView>
     </Layout>
   );
 }

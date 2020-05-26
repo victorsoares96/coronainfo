@@ -3,10 +3,10 @@ import { StyleSheet, FlatList } from 'react-native';
 import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
 
 function formatNumber (num) {
-  return new Intl.NumberFormat().format(num);
+  return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');;
 }
 
-export function ConsolidadoPais({pais, casos, mortes, recuperados}) {
+export function ConsolidadoPais({casos, mortes, recuperados}) {
   return (
     <>
     <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Brasil</Text>
@@ -55,9 +55,9 @@ export function EstadoList({data}) {
       <Card style={styles.card} header={() => <Header estado={estado} populacao={populacao}/>}>
         <Text>
           Casos: {formatNumber(casos)} {'\n'}
-          Casos por Habitante: {formatNumber(casos_hab)} {'\n'}
           Mortes: {formatNumber(mortes)} {'\n'}
-          Mortalidade: {((mortalidade)*100).toFixed(2)}%
+          Taxa de Mortalidade: {((mortalidade)*100).toFixed(2)}% {'\n'}
+          Casos a cada 100 mil habitantes: {casos_hab.toFixed(2)}
         </Text>
       </Card>
     );
@@ -70,7 +70,7 @@ export function EstadoList({data}) {
       <CardList estado={item.state} populacao={item.estimated_population_2019}
                 casos={item.confirmed} casos_hab={item.confirmed_per_100k_inhabitants}
                 mortes={item.deaths} mortalidade={item.death_rate}/>}
-      keyExtractor={item => item.id}
+      keyExtractor={item => item.state}
     />
   );
 }

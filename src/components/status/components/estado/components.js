@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from 'react-native';
 import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
 
 function formatNumber (num) {
-  return new Intl.NumberFormat().format(num);
+  return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');;
 }
 
 export function ConsolidadoEstado({estado, casos, mortes}) {
@@ -50,7 +50,7 @@ export function CityList({data}) {
           Casos: {formatNumber(casos)} {'\n'}
           Mortes: {formatNumber(mortes)} {'\n'}
           Mortalidade: {((mortalidade)*100).toFixed(2)}% {'\n'}
-          Casos a cada 100 mil habitantes: {formatNumber(casos_hab)}
+          Casos a cada 100 mil habitantes: {casos_hab?.toFixed(2)}
         </Text>
       </Card>
     );
@@ -64,7 +64,7 @@ export function CityList({data}) {
       <CardList cidade={item.city} populacao={item.estimated_population_2019}
                 casos={item.last_available_confirmed} casos_hab={item.last_available_confirmed_per_100k_inhabitants}
                 mortes={item.last_available_deaths} mortalidade={item.last_available_death_rate}/>}
-      keyExtractor={item => item.city_ibge_code}
+      keyExtractor={item => item.city}
     />
   );
 }

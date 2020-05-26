@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, Button, Card, CardHeader, List, ListItem, Avatar } from '@ui-kitten/components';
+import { Text, Button, Card, CardHeader, Avatar, Layout } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
@@ -68,23 +68,21 @@ export function Surgimento() {
   
   export function Transmissão() {
     const Header = () => (<CardHeader title='Como o coronavírus se transmite?'/>);
-    const sintomas = new Array(6).fill([
+    const sintomas = [
       'Gotículas de saliva',
       'Espirro',
       'Tosse',
       'Catarro',
       'Contato pessoal próximo (toque ou aperto de mão)',
       'Contato com objetos ou superfícies contaminadas, seguido de contato com a boca, nariz ou olhos.'
-    ]);
-    const renderItem = ({ item, index }) => (
-      <ListItem title={`• ${item[index]}`}/>
-    );
+    ];
     return (
       <Card style={styles.card} header={Header} status='primary'>
         <Text>
           A transmissão dos coronavírus costuma ocorrer pelo ar ou por contato pessoal com secreções contaminadas, como:{'\n'}
+          {'\n'}
         </Text>
-        <List data={sintomas} renderItem={renderItem}/>
+        {sintomas.map((item, index) => <Text category='label' key={index}>{`• ${item}`} {'\n'}</Text>)}
         <Text>
         {'\n'}O vírus pode ficar incubado por duas semanas, período em que os primeiros sintomas levam para aparecer desde a infecção.
         </Text>
@@ -109,7 +107,7 @@ export function Surgimento() {
   
   export function Prevenção() {
     const Header = () => (<CardHeader title='Como se prevenir e evitar o coronavírus?'/>);
-    const prevenção = new Array(8).fill([
+    const prevencao = [
       'Evitar tocar nos olhos, nariz e boca com as mãos não lavadas.',
       'Evitar contato próximo com pessoas doentes.',
       'Ficar em casa quando estiver doente.',
@@ -118,13 +116,10 @@ export function Surgimento() {
       'Contato com objetos ou superfícies contaminadas, seguido de contato com a boca, nariz ou olhos.',
       'Evitar abraços, beijos e apertos de mãos.',
       'Manter distância de até 1 metro das pessoas.'
-    ]);
-    const renderItem = ({ item, index }) => (
-      <ListItem title={`• ${item[index]}`}/>
-    );
+    ];
     return (
       <Card style={styles.card} header={Header} status='primary'>
-        <List data={prevenção} renderItem={renderItem}/>
+      {prevencao.map((item, index) => <Text key={index}>{`• ${item}`} {'\n'}</Text>)}
       </Card>
     );
   }

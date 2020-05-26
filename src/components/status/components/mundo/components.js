@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
+import NumberFormat from 'react-number-format';
 
 function formatNumber (num) {
-  return new Intl.NumberFormat().format(num);
+  //const num_convert = new Intl.NumberFormat().format(num);
+  return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 }
 
 export function ConsolidadoMundo({casos, mortes, recuperados}) {
@@ -64,7 +66,7 @@ export function WorldList({data}) {
       renderItem={({ item }) =>
       <CardList pais={item.countryregion} provincia={item.provincestate == '' ? 'Nenhuma' : item.provincestate}
                 casos={item.confirmed} mortes={item.deaths} recovered={item.recovered}/>}
-      keyExtractor={item => (item.id)}
+      keyExtractor={item => (item.confirmed)?.toString()}
     />
   );
 }

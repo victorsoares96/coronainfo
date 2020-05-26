@@ -45,9 +45,9 @@ export function Estado() {
   const [estados, setEstados] = useState([]);
 
   /* Consolidado Estado */
-  const [Consolidado_confirmados, setConsolidado_confirmados] = useState(null);
-  const [Consolidado_mortes, setConsolidado_mortes] = useState(null);
-  const [Consolidado_ultAtt, setConsolidado_ultAtt] = useState(null); 
+  const [Consolidado_confirmados, setConsolidado_confirmados] = useState(0);
+  const [Consolidado_mortes, setConsolidado_mortes] = useState(0);
+  const [Consolidado_ultAtt, setConsolidado_ultAtt] = useState(0); 
   
   /* Lista de Cidades */
   const [cidades, setCidades] = useState([]);
@@ -60,7 +60,10 @@ export function Estado() {
     <Layout style={{alignItems: 'center'}}>
       {
         isError == false ?
+        <>
         <Spinner status='basic' size='giant'/>
+        <Text category='h3'>Carregando...</Text>
+        </>
         :
         <Error/>
       }
@@ -124,7 +127,7 @@ export function Estado() {
   /* Carrega as informações de casos totais do estado selecionado. */
   async function loadConsolidadoEstado() {
     try {
-      setLoadingStatus(true);
+      //setLoadingStatus(true);
       const response = await axios.get(`https://brasil.io/api/dataset/covid19/caso_full/data/?date=${getYesterdayDay()}&state=${selectedOption}&city=`);
       response.data.results.map((item) => {
       if(item.city == null) {
@@ -134,26 +137,26 @@ export function Estado() {
       }
       });
     } catch (error) {
-      setLoadingStatus(true);
-      setErrorStatus(true);
+      //setLoadingStatus(true);
+      //setErrorStatus(true);
     } finally {
-      setErrorStatus(false);
-      setLoadingStatus(false);
+      //setErrorStatus(false);
+      //setLoadingStatus(false);
     }
   }
   
   /* Carrega a lista de cidades municipios do estado selecionado. */
   async function loadCidades() {
     try {
-      setLoadingStatus(true);
+      //setLoadingStatus(true);
       const response = await axios.get(`https://brasil.io/api/dataset/covid19/caso_full/data/?state=${selectedOption}&date=${getYesterdayDay()}`);
       setCidades(response.data.results);
     } catch(error) {
       setLoadingStatus(true);
       setErrorStatus(true);
     } finally {
-      setErrorStatus(false);
-      setLoadingStatus(false);
+      //setErrorStatus(false);
+      //setLoadingStatus(false);
     }
   }
   /* Carrega a lista de estado uma vez */
@@ -163,8 +166,13 @@ export function Estado() {
 
   /* Funções chamadas sempre que o estado é alterado */
   useEffect(() => {
-    loadConsolidadoEstado();
-    loadCidades();
+    async function load() {
+      setLoadingStatus(true);
+      await loadConsolidadoEstado();
+      await loadCidades();
+      setLoadingStatus(false);
+    }
+    load();
   }, [selectedOption]);
   return (
     <Layout style={styles.container}>
@@ -177,7 +185,7 @@ export function Estado() {
           options={options} selectedOption={selectedOption}
           SelectOption={SelectOption} ult_Att={Consolidado_ultAtt}/>
           <ConsolidadoEstado 
-          estado={getFullStateName(selectedOption)} casos={Consolidado_confirmados} 
+          estado={getFullStateName(selectedOption)} casos={Consolidado_confirmados}
           mortes={Consolidado_mortes}/>
           <CityList data={cidades}/>
           </>

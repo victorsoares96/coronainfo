@@ -18,7 +18,10 @@ export function Mundo() {
     <Layout style={{alignItems: 'center'}}>
       {
         isError == false ?
+        <>
         <Spinner status='basic' size='giant'/>
+        <Text category='h3'>Carregando...</Text>
+        </>
         :
         <Error/>
       }
