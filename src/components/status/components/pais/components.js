@@ -1,40 +1,21 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
+import { getFullStateName, formatNumber, formatDate } from '../shared';
 
-function formatNumber (num) {
-  return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');;
-}
 
-export function ConsolidadoPais({casos, mortes, recuperados}) {
+export function ConsolidadoPais({casos, mortes, recuperados, ult_atualizacao}) {
   return (
     <>
     <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Brasil</Text>
+    <Text category='label' appearance='hint' style={styles.caption}>
+      Ultima atualização: {formatDate(ult_atualizacao)}
+    </Text>
     <Text style={{textAlign: 'center'}}>
       Casos: {formatNumber(casos)},
       Mortes: {formatNumber(mortes)},
       Recuperados: {formatNumber(recuperados)}
     </Text>
-    </>
-  );
-}
-
-export function Selecionar({options, selectedOption, SelectOption, ult_atualizacao}) {
-  return (
-    <>
-    <Text style={styles.caption}>
-      Ultima atualização: {new Date(ult_atualizacao).toLocaleDateString()}
-    </Text>
-    <Select
-      style={styles.select}
-      //data={options}
-      disabled
-      size='small'
-      status='basic'
-      placeholder='Brasil'
-      //selectedOption={selectedOption}
-      //onSelect={SelectOption}
-    />
     </>
   );
 }
@@ -45,7 +26,7 @@ export function EstadoList({data}) {
 
     return (
       <CardHeader 
-      title={estado} 
+      title={getFullStateName(estado)} 
       description={`População: ${formatNumber(populacao)}`}/>
     );
   }
@@ -56,7 +37,7 @@ export function EstadoList({data}) {
         <Text>
           Casos: {formatNumber(casos)} {'\n'}
           Mortes: {formatNumber(mortes)} {'\n'}
-          Taxa de Mortalidade: {((mortalidade)*100).toFixed(2)}% {'\n'}
+          Mortalidade: {((mortalidade)*100).toFixed(2)}% {'\n'}
           Casos a cada 100 mil habitantes: {casos_hab.toFixed(2)}
         </Text>
       </Card>
@@ -92,9 +73,6 @@ const styles = StyleSheet.create({
     margin: 8
   },
   caption: {
-    fontWeight: '100',
-    color: 'grey',
-    fontSize: 12,
     textAlign: 'center'
   }
 });

@@ -4,7 +4,7 @@ import { Layout, Spinner, Text, Button } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-import { ConsolidadoPais, Selecionar, EstadoList } from './components';
+import { ConsolidadoPais, EstadoList } from './components';
 
 export function Pais() {
   const navigation = useNavigation();
@@ -80,8 +80,7 @@ export function Pais() {
           <Loading/>
           :
           <>
-          <Selecionar ult_atualizacao={estados[0]?.date}/>
-          <ConsolidadoPais casos={pais.confirmed} mortes={pais.deaths} recuperados={pais.recovered}/>
+          <ConsolidadoPais ult_atualizacao={estados[0]?.date} casos={pais.confirmed} mortes={pais.deaths} recuperados={pais.recovered}/>
           <EstadoList data={estados}/>
           </>
       }

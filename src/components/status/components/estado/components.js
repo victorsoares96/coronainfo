@@ -1,10 +1,7 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
-
-function formatNumber (num) {
-  return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');;
-}
+import { formatDate, formatNumber } from '../shared';
 
 export function ConsolidadoEstado({estado, casos, mortes}) {
   return (
@@ -18,7 +15,7 @@ export function Selecionar({options, selectedOption, SelectOption, ult_Att}) {
   return (
   <>
     <Text category='label' appearance='hint' style={styles.text}>
-      Ultima atualização {new Date(ult_Att).toLocaleDateString()}
+      Ultima atualização {formatDate(ult_Att)}
     </Text>
     <Select
       style={styles.select}
