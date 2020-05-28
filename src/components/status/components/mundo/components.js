@@ -1,42 +1,37 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
-import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
-import NumberFormat from 'react-number-format';
+import { Text, CardHeader, Card, Input } from '@ui-kitten/components';
+import { formatNumber } from '../shared';
 
-function formatNumber (num) {
-  //const num_convert = new Intl.NumberFormat().format(num);
-  return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-}
-
-export function ConsolidadoMundo({casos, mortes, recuperados}) {
+export function ConsolidadoMundo({casos, mortes, recuperados, ult_atualizacao}) {
   return (
     <>
-    <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Mundo</Text>
-    <Text style={{textAlign: 'center'}}>
-      Casos: {formatNumber(casos)}, 
-      Mortes: {formatNumber(mortes)}, 
+    <Text category='h4' style={styles.text}>Mundo</Text>
+    <Text category='label' appearance='hint' style={styles.text}>
+      Ultima atualização: {new Date(ult_atualizacao).toLocaleDateString()}
+    </Text>
+    <Text style={styles.text}>
+      Casos: {formatNumber(casos)},
+      Mortes: {formatNumber(mortes)},
       Recuperados: {formatNumber(recuperados)}
     </Text>
     </>
   );
 }
 
-export function Selecionar({options, selectedOption, SelectOption}) {
+export function Procurar({ onInputChanges }) {
   return (
-    <Select
-      style={styles.select}
-      data={options}
+    <Input
+      style={{margin: 8}}
       size='small'
       status='basic'
-      disabled
-      placeholder={selectedOption}
-      selectedOption={selectedOption}
-      onSelect={SelectOption}
+      placeholder='Procurar País:'
+      onKeyPress={onInputChanges}
     />
   );
 }
 
-export function WorldList({data}) {
+export function MundoLista({data}) {
 
   function Header({pais, provincia}) {
     return (
@@ -87,10 +82,7 @@ const styles = StyleSheet.create({
   buttonGroup: {
     margin: 8
   },
-  caption: {
-    fontWeight: '100',
-    color: 'grey',
-    fontSize: 12,
+  text: {
     textAlign: 'center'
   }
 });

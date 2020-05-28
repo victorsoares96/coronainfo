@@ -5,10 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 24,
         fontFamily: 'BalooThambi2-Bold',
         margin: 8,
-        lineHeight: 24 * 1.2,
         textAlign: 'center'
     },
     avatar: {
@@ -31,7 +29,7 @@ export function Header() {
     return(
         <>
         <Avatar style={styles.avatar} size='giant' source={require('../../../../assets/corona.png')}/>
-        <Text style={styles.title}>Corona Vírus</Text>
+        <Text category='h1' style={styles.title}>CoronaInfo</Text>
         </>
     );
 }

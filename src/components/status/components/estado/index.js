@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import axios from 'axios';
 
-import { ConsolidadoEstado, Selecionar, CityList } from './components';
+import { ConsolidadoEstado, Selecionar, ListaCidades } from './components';
 import { getFullStateName, getSiglaStateName, Loading, Error, SiglasxEstado } from '../shared';
 
 export function Estado() {
@@ -38,9 +38,7 @@ export function Estado() {
   
   /* Carrega a lista de seleção com todos os estados do Brasil. */
   async function loadLista_Estados() {
-    var estados = [];
-    SiglasxEstado.map((item) => estados.push({text: item.estado}));
-    setLista_Estados(estados);
+    setLista_Estados(SiglasxEstado);
   }
   
   /* Carrega as informações de casos totais do estado selecionado. */
@@ -86,10 +84,10 @@ export function Estado() {
           <Selecionar
           options={lista_estados} selectedOption={estado_selecionado}
           SelectOption={SelecionarEstado} ult_Att={consolidado_estado.last_available_date}/>
-          <ConsolidadoEstado 
+          <ConsolidadoEstado
           estado={getFullStateName(estado_selecionado)} casos={consolidado_estado.last_available_confirmed}
           mortes={consolidado_estado.last_available_deaths}/>
-          <CityList data={cidades}/>
+          <ListaCidades data={cidades}/>
           </>
         :
         <Error/>

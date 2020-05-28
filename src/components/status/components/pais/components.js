@@ -1,17 +1,17 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
-import { Select, Text, CardHeader, Card } from '@ui-kitten/components';
+import { Text, CardHeader, Card } from '@ui-kitten/components';
 import { getFullStateName, formatNumber, formatDate } from '../shared';
 
 
 export function ConsolidadoPais({casos, mortes, recuperados, ult_atualizacao}) {
   return (
     <>
-    <Text style={{fontWeight: '800', fontSize: 22, textAlign: 'center', lineHeight: 24 * 1.2}}>Brasil</Text>
-    <Text category='label' appearance='hint' style={styles.caption}>
+    <Text category='h4' style={styles.text}>Brasil</Text>
+    <Text category='label' appearance='hint' style={styles.text}>
       Ultima atualização: {formatDate(ult_atualizacao)}
     </Text>
-    <Text style={{textAlign: 'center'}}>
+    <Text style={styles.text}>
       Casos: {formatNumber(casos)},
       Mortes: {formatNumber(mortes)},
       Recuperados: {formatNumber(recuperados)}
@@ -23,7 +23,6 @@ export function ConsolidadoPais({casos, mortes, recuperados, ult_atualizacao}) {
 export function EstadoList({data}) {
 
   function Header({estado, populacao}) {
-
     return (
       <CardHeader 
       title={getFullStateName(estado)} 
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
   buttonGroup: {
     margin: 8
   },
-  caption: {
+  text: {
     textAlign: 'center'
-  }
+  },
 });

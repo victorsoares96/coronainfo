@@ -1,10 +1,71 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
-import { Layout, Spinner, Text, Button } from '@ui-kitten/components';
+import {
+  StyleSheet,
+  Image
+} from 'react-native';
+import {
+  Layout,
+  Spinner,
+  Text,
+  Button
+} from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 
-/* Lista de Siglas x Estado */
 export const SiglasxEstado = [
+  {
+    text: 'Norte',
+    items: [
+      { sigla: 'AM', text: 'Amazonas', capital: 'Manaus', index: 1 },
+      { sigla: 'RR', text: 'Roraima', capital: 'Boa Vista', index: 2 },
+      { sigla: 'AP', text: 'Amapá', capital: 'Manaus', index: 3 },
+      { sigla: 'PA', text: 'Pará', capital: 'Belém', index: 4 },
+      { sigla: 'TO', text: 'Tocantins', capital: 'Palmas', index: 5 },
+      { sigla: 'RO', text: 'Rondônia', capital: 'Porto Velho', index: 6 },
+      { sigla: 'AC', text: 'Acre', capital: 'Rio Branco', index: 7 },
+    ],
+  },
+  {
+    text: 'Nordeste',
+    items: [
+      { sigla: 'MA', text: 'Maranhão', capital: 'São Luís', index: 8 },
+      { sigla: 'PI', text: 'Piauí', capital: 'Teresina', index: 9 },
+      { sigla: 'CE', text: 'Ceará', capital: 'Fortaleza', index: 10 },
+      { sigla: 'RN', text: 'Rio Grande do Norte', capital: 'Natal', index: 11 },
+      { sigla: 'PE', text: 'Pernambuco', capital: 'Recife', index: 12 },
+      { sigla: 'PC', text: 'Paraíba', capital: 'João Pessoa', index: 13 },
+      { sigla: 'SE', text: 'Sergipe', capital: 'Aracaju', index: 14 },
+      { sigla: 'AL', text: 'Alagoas', capital: 'Maceió', index: 15 },
+      { sigla: 'BA', text: 'Bahia', capital: 'Salvador', index: 16 },
+    ],
+  },
+  {
+    text: 'Centro Oeste',
+    items: [
+      { sigla: 'MT', text: 'Mato Grosso', capital: 'Cuiabá', index: 17 },
+      { sigla: 'MS', text: 'Mato Grosso do Sul', capital: 'Teresina', index: 18 },
+      { sigla: 'GO', text: 'Goiás', capital: 'Goiânia', index: 19 },
+    ],
+  },
+  {
+    text: 'Sudeste',
+    items: [
+      { sigla: 'SP', text: 'São Paulo', capital: 'São Paulo', index: 20 },
+      { sigla: 'RJ', text: 'Rio de Janeiro', capital: 'Rio de Janeiro', index: 21 },
+      { sigla: 'ES', text: 'Espirito Santo', capital: 'Vitória', index: 22 },
+      { sigla: 'MG', text: 'Minas Gerais', capital: 'Belo Horizonte', index: 23 },
+    ],
+  },
+  {
+    text: 'Sul',
+    items: [
+      { sigla: 'PR', text: 'Paraná', capital: 'Curitiba', index: 24 },
+      { sigla: 'RS', text: 'Rio Grande do Sul', capital: 'Porto Alegre', index: 25 },
+      { sigla: 'SC', text: 'Santa Catarina', capital: 'Florianópolis', index: 26 },
+    ],
+  }
+];
+/* Lista de Siglas x Estado */
+/*export const SiglasxEstado = [
   {sigla: 'AC', estado: 'Acre'},
   {sigla: 'AL', estado: 'Alagoas'},
   {sigla: 'AP', estado: 'Amapá'},
@@ -32,17 +93,13 @@ export const SiglasxEstado = [
   {sigla: 'SP', estado: 'São Paulo'},
   {sigla: 'SE', estado: 'Sergipe'},
   {sigla: 'TO', estado: 'Tocantins'}
-];
+];*/
 
 export function Loading() {
   return(
     <Layout style={{alignItems: 'center'}}>
-    {
-      <>
       <Spinner status='basic' size='giant'/>
       <Text category='h3'>Carregando...</Text>
-      </>
-    }
     </Layout>
   );
 }
@@ -80,23 +137,33 @@ export function formatNumber(num) {
 }
 
 export function formatDate(dateStr) {
-  const dArr = dateStr.split("-"); // ex input "2010-01-18"
-  return dArr[2] + "/" + dArr[1] + "/" + dArr[0].substring(2); //ex out: "18/01/10"
+  const dArr = dateStr.split("-");
+  return dArr[2] + "/" + dArr[1] + "/" + dArr[0].substring(2);
 }
 
 export function getFullStateName(sigla) {
   var estado = 'Erro';
-  SiglasxEstado.map((item) => {
-    if (sigla == item.sigla) return estado = item.estado;
-  });
+  for (let i = 0; i < SiglasxEstado.length; i++) {
+    for (let x = 0; x < SiglasxEstado[i].items.length; x++) {
+      if (sigla == SiglasxEstado[i].items[x].sigla) {
+        estado = SiglasxEstado[i].items[x].text;
+        break;
+      }
+    }
+  }
   return estado;
 }
 
 export function getSiglaStateName(full_name) {
   var estado = 'Erro';
-  SiglasxEstado.map((item) => {
-    if (full_name == item.estado) return estado = item.sigla;
-  });
+  for (let i = 0; i < SiglasxEstado.length; i++) {
+    for (let x = 0; x < SiglasxEstado[i].items.length; x++) {
+      if (full_name == SiglasxEstado[i].items[x].text) {
+        estado = SiglasxEstado[i].items[x].sigla;
+        break;
+      }
+    }
+  }
   return estado;
 }
 
@@ -107,11 +174,23 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
   },
+  select: {
+    margin: 8
+  },
   text: {
     textAlign: 'center',
     fontSize: 14
   },
   bTryAgain: {
     margin: 25
-  }
+  },
+  buttonGroup: {
+    margin: 8
+  },
+  text: {
+    textAlign: 'center'
+  },
+  card: {
+    marginVertical: 8
+  },
 });

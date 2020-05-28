@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "CoronaVirus",
-    "slug": "coronavirus",
+    "name": "CoronaInfo",
+    "slug": "coronainfo",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -10,19 +10,19 @@
       "web"
     ],
     "ios": {
-      "bundleIdentifier": "com.victor.covidg19",
+      "bundleIdentifier": "com.victor.covid19",
       "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.victor.codvid19",
+      "package": "com.victor.covid19",
       "versionCode": 1
     },
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/corona.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/corona.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

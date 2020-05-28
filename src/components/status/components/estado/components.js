@@ -15,7 +15,7 @@ export function Selecionar({options, selectedOption, SelectOption, ult_Att}) {
   return (
   <>
     <Text category='label' appearance='hint' style={styles.text}>
-      Ultima atualização {formatDate(ult_Att)}
+      Ultima atualização: {formatDate(ult_Att)}
     </Text>
     <Select
       style={styles.select}
@@ -30,7 +30,7 @@ export function Selecionar({options, selectedOption, SelectOption, ult_Att}) {
   );
 }
 
-export function CityList({data}) {
+export function ListaCidades({data}) {
 
   function Header({cidade, populacao}) {
     return (
