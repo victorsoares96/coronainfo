@@ -18,7 +18,7 @@
   <a href="https://github.com/jvjv33">
     <img alt="Made by Victor Soares" src="https://img.shields.io/badge/made%20by-Victor%20Soares-blue">
     <img alt="Version 1.0" src="https://img.shields.io/badge/version-1.0-brightgreen">
-    <img alt="#ficaemcasa" src="https://img.shields.io/badge/%23-ficaemcasa-red">
+    <img alt="#fiqueemcasa" src="https://img.shields.io/badge/%23-ficaemcasa-red">
   </a>
 </p>
 
@@ -30,13 +30,12 @@
 - Navigation
   - [React Navigation](https://reactnavigation.org)
 - UI Theme
-  - [UI Kitten](https://akveo.github.io/react-native-ui-kitten)
+  - [UI Kitten 4.4.1](https://akveo.github.io/react-native-ui-kitten)
 - HTTP Comunication
   - [Axios](https://github.com/axios/axios)
 - API's
   - [COVID-19-API](https://github.com/Laeyoung/COVID-19-API)
   - [covid19-br](https://github.com/turicas/covid19-br)
-  - [corona-analytic-api](https://github.com/rodrilima/corona-analytic-api)
 
 ## Instruções
 - `git clone https://github.com/jvjv33/coronavirus.git`
@@ -62,10 +61,10 @@
 - [X] Casos pelo Mundo (País X País)
 - [X] Casos pelo Brasil (Estado X Estado)
 - [X] Casos por Estado (Cidade X Cidade)
+- [X] SplashScreen
+- [X] Melhorar disposição dos números
+- [X] Adicionar label *~~Atualizado em XX/XX/XX as XX:XX~~*
 - [ ] Acrescentar botão de atualização forçada
 - [ ] Theme Switcher (Light/Dark Mode)
-- [ ] SplashScreen
 - [ ] Adicionar Gráficos
-- [ ] Melhorar disposição dos números
 - [ ] Acrescentar boletins informativos de cada estado
-- [ ] Adicionar label *~~Atualizado em XX/XX/XX as XX:XX~~*
