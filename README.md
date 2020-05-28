@@ -34,8 +34,8 @@
 - HTTP Comunication
   - [Axios](https://github.com/axios/axios)
 - API's
-  - [COVID-19-API](https://github.com/Laeyoung/COVID-19-API)
-  - [covid19-br](https://github.com/turicas/covid19-br)
+  - [Wuhan-Coronavirus](https://ainize.ai/laeyoung/wuhan-coronavirus-api)
+  - [Brasil.io](https://brasil.io/api/dataset/covid19/caso_full/data/)
 
 ## Instruções
 - `git clone https://github.com/jvjv33/coronavirus.git`
