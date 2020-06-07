@@ -61,7 +61,7 @@ export function MundoLista({data}) {
       renderItem={({ item }) =>
       <CardList pais={item.countryregion} provincia={item.provincestate == '' ? 'Nenhuma' : item.provincestate}
                 casos={item.confirmed} mortes={item.deaths} recovered={item.recovered}/>}
-      keyExtractor={item => (item.confirmed)?.toString()}
+      keyExtractor={item => ((item.location.lat+item.location.lng)/item.confirmed).toString()}
     />
   );
 }

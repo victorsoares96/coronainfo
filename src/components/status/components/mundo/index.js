@@ -40,24 +40,24 @@ export function Mundo() {
     setConsolidado_Mundo(response.data);
   }
 
-  const onInputChanges = (e) => {
+  /*const onInputChanges = (e) => {
     setPais_Procurado(e.target.value);
-  };
+  };*/
 
-  async function loadPaisProcurado() {
+  /*async function loadPaisProcurado() {
     const response = await axios.get(url_paises);
     const search = response.data.filter(function (e) {
       return e.countryregion.toLowerCase().indexOf(pais_procurado.toLowerCase()) > -1;
     });
     setPaises(search);
-  }
+  }*/
 
   async function loadListaPaises() {
     const response = await axios.get(url_paises);
     setPaises(response.data);
   }
   
-  useEffect(() => {
+  /*useEffect(() => {
     async function load() {
       try {
         await loadPaisProcurado();
@@ -69,13 +69,13 @@ export function Mundo() {
     setTimeout(() => {
       load();
     }, 2000);
-  }, [pais_procurado]);
+  }, [pais_procurado]);*/
   useEffect(() => {
     async function load() {
       try {
         setStatusCode(0);
-        loadConsolidadoMundo();
-        loadListaPaises();
+        await loadConsolidadoMundo();
+        await loadListaPaises();
         setStatusCode(1);
       } catch (error) {
         setStatusCode(3);
