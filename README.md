@@ -45,13 +45,13 @@
 
 ## Telas
 <h1 align="center">
-  <img alt="Screenshot 1" src="https://user-images.githubusercontent.com/19741953/79405092-de887580-7f69-11ea-93c1-85355aa5015f.jpg" width="250px" />
-  <img alt="Screenshot 2" src="https://user-images.githubusercontent.com/19741953/79405252-417a0c80-7f6a-11ea-8030-9baf02483185.jpg" width="250px" />
-  <img alt="Screenshot 3" src="https://user-images.githubusercontent.com/19741953/79405205-25766b00-7f6a-11ea-9cf2-68a339001bd1.jpg" width="250px" />
-  <img alt="Screenshot 4" src="https://user-images.githubusercontent.com/19741953/79405343-83a34e00-7f6a-11ea-9fbc-d89d4fc964e0.jpg" width="250px" />
-  <img alt="Screenshot 5" src="https://user-images.githubusercontent.com/19741953/79405406-b6e5dd00-7f6a-11ea-9eb0-22dccf9fd990.jpg" width="250px" />
-  <img alt="Screenshot 6" src="https://user-images.githubusercontent.com/19741953/79405435-c5cc8f80-7f6a-11ea-804f-263a10592869.jpg" width="250px" />
-  <img alt="Screenshot 7" src="https://user-images.githubusercontent.com/19741953/79405453-cf55f780-7f6a-11ea-92a0-b8a01929db5c.jpg" width="250px" />
+  <img alt="Screenshot 1" src="https://user-images.githubusercontent.com/19741953/83977405-b0bf0d80-a8d6-11ea-83da-c72b10f4734a.jpg" width="250px" />
+  <img alt="Screenshot 2" src="https://user-images.githubusercontent.com/19741953/83977416-cb918200-a8d6-11ea-9668-fb205822fe09.jpg" width="250px" />
+  <img alt="Screenshot 3" src="https://user-images.githubusercontent.com/19741953/83977428-d9470780-a8d6-11ea-990a-272a443fa6de.jpg" width="250px" />
+  <img alt="Screenshot 3.5" src="https://user-images.githubusercontent.com/19741953/83977447-f1b72200-a8d6-11ea-96ef-cfdd35067d17.jpg" width="250px" />
+  <img alt="Screenshot 4" src="https://user-images.githubusercontent.com/19741953/83977462-14493b00-a8d7-11ea-989f-f26d6b9c238b.jpg" width="250px" />
+  <img alt="Screenshot 5" src="https://user-images.githubusercontent.com/19741953/83977469-22975700-a8d7-11ea-8696-84d8a46e3764.jpg" width="250px" />
+  <img alt="Screenshot 6" src="https://user-images.githubusercontent.com/19741953/83977537-8883de80-a8d7-11ea-8b3b-7bd43393371e.jpg" width="250px" />
 </h1>
 
 ## Implementações
