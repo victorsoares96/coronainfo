@@ -15,8 +15,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jvjv33">
-    <img alt="Made by Victor Soares" src="https://img.shields.io/badge/made%20by-Victor%20Soares-blue">
+  <a href="https://github.com/victorsoares96">
+    <img alt="Made by Victor Soares" src="https://img.shields.io/badge/made%20by-victorsoares96-blue">
     <img alt="Version 1.0" src="https://img.shields.io/badge/version-1.0-brightgreen">
     <img alt="#fiqueemcasa" src="https://img.shields.io/badge/%23-ficaemcasa-red">
   </a>
@@ -38,8 +38,8 @@
   - [Brasil.io](https://brasil.io/api/dataset/covid19/caso_full/data/)
 
 ## Instruções
-- `git clone https://github.com/jvjv33/coronavirus.git`
-- `cd coronavirus`
+- `git clone https://github.com/victorsoares96/coronainfo.git`
+- `cd coronainfo`
 - `npm i`
 - `expo start`
 
