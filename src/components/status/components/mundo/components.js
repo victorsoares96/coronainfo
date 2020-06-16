@@ -8,7 +8,7 @@ export function ConsolidadoMundo({casos, mortes, recuperados, ult_atualizacao}) 
     <>
     <Text category='h4' style={styles.text}>Mundo</Text>
     <Text category='label' appearance='hint' style={styles.text}>
-      Ultima atualização: {new Date(ult_atualizacao).toLocaleDateString()}
+      Ultima atualização: {new Date(ult_atualizacao).toLocaleDateString('pt-BR')}
     </Text>
     <Text style={styles.text}>
       Casos: {formatNumber(casos)},

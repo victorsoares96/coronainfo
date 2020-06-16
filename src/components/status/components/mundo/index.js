@@ -70,6 +70,7 @@ export function Mundo() {
       load();
     }, 2000);
   }, [pais_procurado]);*/
+  
   useEffect(() => {
     async function load() {
       try {
